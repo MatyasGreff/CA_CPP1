@@ -1,0 +1,37 @@
+<!-- This is an extension to the base.html file, it is connected to the index view -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+        <fieldset class="form-group">
+            <legend class="w-auto"><h1>Object Rekognition</h1></legend>
+        </fieldset>
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Rekognize Objects with AWS Rekognition</legend>
+            <div class="form-group">
+                <p>Object rekognition takes any .png or .jpeg file and detect recognizable objects on it.</p>
+                <p>It returns the names and number of instances of the detected objects.</p>
+                <h4>Warning!</h4>
+                <h5>The images you upload will be public, do not share sensitive information!</h5> <!--Some general info about the app -->
+            </div>
+        </fieldset>
+        <form method='POST' action="" enctype="multipart/form-data"> <!-- Form, we are expecting form data to be fed to this -->
+            {% csrf_token %} <!-- This is necessary for forms, it prevents cross site request forgery -->
+        <div class ="form-group">
+            <label>Upload Image</label>
+            <input name="image" type="file" class="form-control-file" accept="image/png,image/jpeg" required="required"> <!-- Form image field with some validation -->
+            <button type='submit' class="btn btn-primary m-3">Rekognize</button>
+        </form>    
+        </div>
+        {% if rekog %}
+        <img style="max-width:600px;width:100%" src="{{ return_img.image.url }}">
+        <h4>Labels Identified:</h4>
+        {% for name in names %}
+                {{ name }}    
+        {% endfor %}
+        <br>
+        {% for i in rekog %}
+            {{ i }}
+        {% endfor %}
+        {% endif %}    <!-- Some jinja2 to display the context that was sent from the view (displays results of rekognition) -->
+    </div>
+{% endblock content %}

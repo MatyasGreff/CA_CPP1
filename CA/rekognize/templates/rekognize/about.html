@@ -1,0 +1,20 @@
+<!-- The same idea as index.html, comments are there -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+        <fieldset class="form-group">
+            <legend class="w-auto"><h1>About Page</h1></legend>
+        </fieldset>
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Summary</legend>
+            <div class="form-group">
+                <p>This project is the work of Matyas Greff X21129878</p>
+                <p>This application is not to be used for processing or storing sesitive information. Everything that is processed, will be publicly accessible.</p>
+                <p>All rights are reserved.</p>
+                <p>Contact: x21129878@student.ncirl.ie</p>
+                {% load static %}
+                <a href="https://aws.amazon.com/rekognition/"><img src="{% static 'rekog_image.png' %}"></a>
+            </div>
+        </fieldset>
+        </div>
+{% endblock content %}

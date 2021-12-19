@@ -1,0 +1,39 @@
+<!-- The same idea as index.html, comments are there -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+<div class="col-md-9">
+    <div class="row">
+        {% for image in page_obj %}
+            <div class="col-md-6">
+                <div class="card my-2">
+                    <img class="image-thumbnail" src="{{ image.image.url }}" alt="Card image cap"> <!--Loop through, and display all images-->
+                        <a href="{% url 'viewimage' image.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                </div>
+            </div>
+            {% empty %}
+            <h3>No photos...</h3>
+            {% endfor %}
+            
+        </div>    
+    </div>  
+</div>
+<!--Standard pagination below-->
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock content %}

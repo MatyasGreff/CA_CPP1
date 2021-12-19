@@ -1,0 +1,36 @@
+<!-- The same idea as index.html, comments are there -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+        <fieldset class="form-group">
+            <legend class="w-auto"><h1>Celebrity Rekognition</h1></legend>
+        </fieldset>
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Rekognize celebrities with AWS Rekognition</legend>
+            <div class="form-group">
+                <p>Celebrity rekognition takes an image of a celebrity or celebrities as input and recognizes them.</p>
+                <p>It returns names and links</p>
+                <h4>Warning!</h4>
+                <h5>The images you upload will be public, do not share sensitive information!</h5>
+            </div>
+        </fieldset>
+        <form method='POST' action="" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class ="form-group">
+            <label>Upload Image</label>
+            <input name="image" type="file" class="form-control-file" accept="image/png,image/jpeg" required="required">
+            <button type='submit' class="btn btn-primary m-3">Rekognize</button>
+        </form>    
+        </div>
+        {% if names %}
+            <img style="max-width:600px;width:100%" src="{{ return_img.image.url }}">
+            <h4>Name(s):</h4>
+            {% for name in names %}
+                {{ name }}<br>
+            {% endfor %}
+            <h4>Link(s)</h4>
+            {% for link in rekog %}
+                <a href ="https://{{ link }}">{{ link }}<br></a>
+            {% endfor %}
+        {% endif %}
+{% endblock content %}

@@ -1,0 +1,19 @@
+<!-- The same idea as index.html, comments are there -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+
+                <a href="{% url 'allimages' %}" class="btn btn-dark my-3">Go Back</a>
+
+                <div style="height: 90vh;">
+                    <img style="max-width: 100%; max-height: 100%;" src="{{image.image.url}}">
+
+                    <p>{{image.description}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
